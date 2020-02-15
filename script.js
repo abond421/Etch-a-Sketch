@@ -1,6 +1,7 @@
-let newColour;
 let container = document.getElementById("container");
 let resetBtn = document.getElementById("reset");
+let randomBtn = document.getElementById("random");
+let newColour = "#000";
 
 function makeGrid(rows, columns) {
   for (var i = 0; i < rows; i++) {
@@ -12,35 +13,40 @@ function makeGrid(rows, columns) {
     var nextRow = document.createElement("br");
     container.appendChild(nextRow);
   }
+  sketch();
 }
 
 function resetGrid() {
-    while (container.firstChild) {
-        container.removeChild(container.firstChild);
-    }
-}
-
-function sketch() {
-  const rowList = document.querySelectorAll(".row");
-  rowList.forEach(row => {
-    row.addEventListener("mouseover", e => {
-      e.target.style.background = '#000';
-    });
-  });
+  while (container.firstChild) {
+    container.removeChild(container.firstChild);
+  }
 }
 
 function randomColour() {
   let r = Math.floor(Math.random() * 256);
   let g = Math.floor(Math.random() * 256);
   let b = Math.floor(Math.random() * 256);
-  newColour = "rgb(" + r + ", " + g + ", " + b + ")";
+
+  newColour = `rgb(${r}, ${g}, ${b})`;
+
 }
 
-resetBtn.addEventListener('click', (e) => {
-    resetGrid();
-    makeGrid(16, 16);
-    sketch();
+function sketch() {
+  const rowList = document.querySelectorAll(".row");
+  rowList.forEach(row => {
+    row.addEventListener("mouseover", e => {
+      e.target.style.background = newColour;
+    });
+  });
+}
+
+resetBtn.addEventListener("click", e => {
+  resetGrid();
+  makeGrid(16, 16);
+});
+
+randomBtn.addEventListener("click", (e) => {
+    randomColour();
 });
 
 makeGrid(16, 16);
-sketch();
