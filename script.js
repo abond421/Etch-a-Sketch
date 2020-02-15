@@ -2,6 +2,8 @@ let container = document.getElementById("container");
 let resetBtn = document.getElementById("reset");
 let randomBtn = document.getElementById("random");
 let sizeBtn = document.getElementById("size");
+let currentColour = document.getElementById("current-colour");
+
 let newColour = "#000";
 
 function makeGrid(dimensions) {
@@ -34,6 +36,7 @@ function randomColour() {
 
 function sketch() {
   const rowList = document.querySelectorAll(".row");
+  currentColour.style.background = newColour;
   rowList.forEach(row => {
     row.addEventListener("mouseover", e => {
       e.target.style.background = newColour;
@@ -48,6 +51,7 @@ resetBtn.addEventListener("click", e => {
 
 randomBtn.addEventListener("click", (e) => {
     randomColour();
+    currentColour.style.background = newColour;
 });
 
 sizeBtn.addEventListener("click", (e) => {

@@ -10,10 +10,14 @@ body {
     display:inline-block;
     vertical-align:top;
     border: 1px solid #000;
-    height: 25px;
-    width: 25px;
+    height: 40px;
+    width: 40px;
 }
 
-#container div:hover {
-    background: #000;
+#current-colour {
+    display:inline-block;
+    vertical-align:top;
+    border: 1px solid #000;
+    height: 40px;
+    width: 40px;
 }
