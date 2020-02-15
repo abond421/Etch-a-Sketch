@@ -3,7 +3,7 @@ let resetBtn = document.getElementById("reset");
 let randomBtn = document.getElementById("random");
 let sizeBtn = document.getElementById("size");
 let currentColour = document.getElementById("current-colour");
-
+let currentDimensions = 16;
 let newColour = "#000";
 
 function makeGrid(dimensions) {
@@ -46,7 +46,7 @@ function sketch() {
 
 resetBtn.addEventListener("click", e => {
   resetGrid();
-  makeGrid(16);
+  makeGrid(currentDimensions);
 });
 
 randomBtn.addEventListener("click", (e) => {
@@ -56,7 +56,8 @@ randomBtn.addEventListener("click", (e) => {
 
 sizeBtn.addEventListener("click", (e) => {
     resetGrid();
-    makeGrid(prompt("What size would you like your grid to be? e.g, 2, 4, 8, 16, etc."));
+    currentDimensions = prompt("What size would you like your grid to be? e.g, 2, 4, 8, 16, etc.");
+    makeGrid(currentDimensions);
 });
 
 makeGrid(16);
