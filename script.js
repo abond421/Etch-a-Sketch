@@ -1,5 +1,6 @@
 let newColour;
 let container = document.getElementById("container");
+let resetBtn = document.getElementById("reset");
 
 function makeGrid(rows, columns) {
   for (var i = 0; i < rows; i++) {
@@ -13,7 +14,13 @@ function makeGrid(rows, columns) {
   }
 }
 
-function sketch(colour) {
+function resetGrid() {
+    while (container.firstChild) {
+        container.removeChild(container.firstChild);
+    }
+}
+
+function sketch() {
   const rowList = document.querySelectorAll(".row");
   rowList.forEach(row => {
     row.addEventListener("mouseover", e => {
@@ -28,6 +35,12 @@ function randomColour() {
   let b = Math.floor(Math.random() * 256);
   newColour = "rgb(" + r + ", " + g + ", " + b + ")";
 }
+
+resetBtn.addEventListener('click', (e) => {
+    resetGrid();
+    makeGrid(16, 16);
+    sketch();
+});
 
 makeGrid(16, 16);
 sketch();
