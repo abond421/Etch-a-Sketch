@@ -1,11 +1,12 @@
 let container = document.getElementById("container");
 let resetBtn = document.getElementById("reset");
 let randomBtn = document.getElementById("random");
+let sizeBtn = document.getElementById("size");
 let newColour = "#000";
 
-function makeGrid(rows, columns) {
-  for (var i = 0; i < rows; i++) {
-    for (var j = 0; j < columns; j++) {
+function makeGrid(dimensions) {
+  for (var i = 0; i < dimensions; i++) {
+    for (var j = 0; j < dimensions; j++) {
       var div = document.createElement("div");
       container.appendChild(div);
       div.classList.add("row");
@@ -42,11 +43,16 @@ function sketch() {
 
 resetBtn.addEventListener("click", e => {
   resetGrid();
-  makeGrid(16, 16);
+  makeGrid(16);
 });
 
 randomBtn.addEventListener("click", (e) => {
     randomColour();
 });
 
-makeGrid(16, 16);
+sizeBtn.addEventListener("click", (e) => {
+    resetGrid();
+    makeGrid(prompt("What size would you like your grid to be? e.g, 2, 4, 8, 16, etc."));
+});
+
+makeGrid(16);
