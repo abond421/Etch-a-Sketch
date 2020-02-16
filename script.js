@@ -13,6 +13,16 @@ let newColour = "#000";
 
 
 function makeGrid(dimensions) {
+
+  if (dimensions < minSize) {
+    dimensions = 4;
+  }
+
+  if (dimensions > maxSize) {
+    dimensions = 64;
+  }
+
+
   container.style.setProperty("--rowAmount" , dimensions);
   for (var i = 0; i < dimensions; i++) {
     for (var j = 0; j < dimensions; j++) {
@@ -61,7 +71,7 @@ randomBtn.addEventListener("click", (e) => {
 
 sizeBtn.addEventListener("click", (e) => {
     resetGrid();
-    currentDimensions = prompt("What size would you like your grid to be? e.g, 4, 8, 16, etc. \n2 - 64 is the limit.");
+    currentDimensions = prompt("What size would you like your grid to be? e.g, 4, 8, 16, etc. \n4 - 64 is the limit.");
     makeGrid(currentDimensions);
 });
 
