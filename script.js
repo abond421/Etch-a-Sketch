@@ -10,6 +10,7 @@ const minSize = 4;
 let currentColour = document.getElementById("current-colour");
 let currentDimensions = 16;
 let newColour = "#000";
+let rainbow = false;
 
 function makeGrid(dimensions) {
   if (dimensions < minSize) {
@@ -50,7 +51,13 @@ function sketch() {
   currentColour.style.background = newColour;
   rowList.forEach(row => {
     row.addEventListener("mouseover", e => {
-      e.target.style.background = newColour;
+      if (!rainbow) {
+        e.target.style.background = newColour;
+      } else {
+        randomColour();
+        e.target.style.background = newColour;
+        currentColour.style.background = newColour;
+      }
     });
   });
 }
@@ -63,13 +70,16 @@ resetBtn.addEventListener("click", e => {
 randomBtn.addEventListener("click", e => {
   randomColour();
   currentColour.style.background = newColour;
+  if (rainbow) {
+    rainbow = false;
+    rainBtn.innerHTML = "Rainbow: OFF!";
+  }
 });
 
 sizeBtn.addEventListener("click", e => {
   currentDimensions = prompt(
     "What size would you like your grid to be? e.g, 4, 8, 16, etc. \n4 - 64 is the limit."
   );
-
   if (currentDimensions == null) {
     return;
   }
@@ -79,7 +89,13 @@ sizeBtn.addEventListener("click", e => {
 });
 
 rainBtn.addEventListener("click", e => {
-  
-})
+  if (!rainbow) {
+    rainbow = true;
+    rainBtn.innerHTML = "Rainbow: ON!";
+  } else {
+    rainbow = false;
+    rainBtn.innerHTML = "Rainbow: OFF!";
+  }
+});
 
 makeGrid(16);
