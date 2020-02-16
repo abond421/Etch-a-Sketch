@@ -1,20 +1,25 @@
-let container = document.getElementById("container");
-let resetBtn = document.getElementById("reset");
-let randomBtn = document.getElementById("random");
-let sizeBtn = document.getElementById("size");
+const container = document.getElementById("container");
+const resetBtn = document.getElementById("reset");
+const randomBtn = document.getElementById("random");
+const sizeBtn = document.getElementById("size");
+const maxSize = 64;
+const minSize = 4;
+
+
 let currentColour = document.getElementById("current-colour");
 let currentDimensions = 16;
 let newColour = "#000";
 
+
+
 function makeGrid(dimensions) {
+  container.style.setProperty("--rowAmount" , dimensions);
   for (var i = 0; i < dimensions; i++) {
     for (var j = 0; j < dimensions; j++) {
       var div = document.createElement("div");
       container.appendChild(div);
       div.classList.add("row");
     }
-    var nextRow = document.createElement("br");
-    container.appendChild(nextRow);
   }
   sketch();
 }
@@ -56,7 +61,7 @@ randomBtn.addEventListener("click", (e) => {
 
 sizeBtn.addEventListener("click", (e) => {
     resetGrid();
-    currentDimensions = prompt("What size would you like your grid to be? e.g, 2, 4, 8, 16, etc.");
+    currentDimensions = prompt("What size would you like your grid to be? e.g, 4, 8, 16, etc. \n2 - 64 is the limit.");
     makeGrid(currentDimensions);
 });
 
