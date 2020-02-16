@@ -2,18 +2,16 @@ const container = document.getElementById("container");
 const resetBtn = document.getElementById("reset");
 const randomBtn = document.getElementById("random");
 const sizeBtn = document.getElementById("size");
+const rainBtn = document.getElementById("rainbow");
+
 const maxSize = 64;
 const minSize = 4;
-
 
 let currentColour = document.getElementById("current-colour");
 let currentDimensions = 16;
 let newColour = "#000";
 
-
-
 function makeGrid(dimensions) {
-
   if (dimensions < minSize) {
     dimensions = 4;
   }
@@ -22,8 +20,7 @@ function makeGrid(dimensions) {
     dimensions = 64;
   }
 
-
-  container.style.setProperty("--rowAmount" , dimensions);
+  container.style.setProperty("--rowAmount", dimensions);
   for (var i = 0; i < dimensions; i++) {
     for (var j = 0; j < dimensions; j++) {
       var div = document.createElement("div");
@@ -46,7 +43,6 @@ function randomColour() {
   let b = Math.floor(Math.random() * 256);
 
   newColour = `rgb(${r}, ${g}, ${b})`;
-
 }
 
 function sketch() {
@@ -64,15 +60,26 @@ resetBtn.addEventListener("click", e => {
   makeGrid(currentDimensions);
 });
 
-randomBtn.addEventListener("click", (e) => {
-    randomColour();
-    currentColour.style.background = newColour;
+randomBtn.addEventListener("click", e => {
+  randomColour();
+  currentColour.style.background = newColour;
 });
 
-sizeBtn.addEventListener("click", (e) => {
-    resetGrid();
-    currentDimensions = prompt("What size would you like your grid to be? e.g, 4, 8, 16, etc. \n4 - 64 is the limit.");
-    makeGrid(currentDimensions);
+sizeBtn.addEventListener("click", e => {
+  currentDimensions = prompt(
+    "What size would you like your grid to be? e.g, 4, 8, 16, etc. \n4 - 64 is the limit."
+  );
+
+  if (currentDimensions == null) {
+    return;
+  }
+
+  resetGrid();
+  makeGrid(currentDimensions);
 });
+
+rainBtn.addEventListener("click", e => {
+  
+})
 
 makeGrid(16);
